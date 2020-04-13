@@ -1,0 +1,84 @@
+{
+  "name": "toshl-extended-report",
+  "version": "0.1.0",
+  "description": "App with several extensions for Toshl",
+  "main": "index.js",
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "classnames": "2.2.6",
+    "node-fetch": "^2.6.0",
+    "node-sass": "4.13.0",
+    "prop-types": "15.7.2",
+    "react": "16.11.0",
+    "react-dom": "16.11.0",
+    "react-jss": "10.0.0",
+    "react-scripts": "3.2.0",
+    "react-spring": "8.0.27"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start:server": "node ./server",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src ./api ./server ./tools --cache",
+    "lint:fix": "npm run lint -- --fix",
+    "precommit": "npm run lint",
+    "prepush": "npm run lint",
+    "clean": "node ./tools/clean.js",
+    "stage": "npm run clean && node ./tools/stage.js",
+    "deploy": "npm run clean && now --name $NOW_PROJECT --token=$NOW_TOKEN --prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andres-kovalev/toshl-extended-report.git"
+  },
+  "keywords": [
+    "toshl",
+    "extended",
+    "app",
+    "pwa"
+  ],
+  "author": {
+    "name": "Andres Kovalev",
+    "email": "mail@akovalev.ru"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andres-kovalev/toshl-extended-report/issues"
+  },
+  "homepage": "https://ter.andres-kovalev.com/",
+  "devDependencies": {
+    "babel-eslint": "10.0.3",
+    "create-react-app": "3.2.0",
+    "eslint-config-airbnb": "18.1.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.19.0",
+    "husky": "4.2.5",
+    "now": "16.1.2",
+    "standard-version": "^7.1.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit",
+      "pre-push": "npm run prepush"
+    }
+  },
+  "proxy": "http://localhost:9000"
+}

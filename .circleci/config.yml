@@ -1,0 +1,86 @@
+version: 2
+jobs:
+  check-build:
+    docker:
+      - image: circleci/node:12.13.0
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-deps
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: check
+          command: npm run lint
+  stage:
+    docker:
+      - image: circleci/node:12.13.0
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: stage
+          command: npm run stage
+  deploy:
+    docker:
+      - image: circleci/node:12.13.0
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: publish
+          command: npm run deploy
+workflows:
+  version: 2
+  check-pr:
+    jobs:
+      - check-build:
+          filters:
+            branches:
+              ignore: master
+      - stage:
+          requires:
+            - check-build
+          filters:
+            branches:
+              ignore: master
+  check-master:
+    jobs:
+      - check-build:
+          filters:
+            branches:
+              only: master
+            tags:
+              ignore: /^\d+\.\d+\.\d+$/
+  deploy-app:
+    jobs:
+      - check-build:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+      - deploy:
+          requires:
+            - check-build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/
