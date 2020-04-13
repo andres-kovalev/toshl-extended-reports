@@ -1,7 +1,9 @@
 const HOST = 'https://api.toshl.com/';
 
 const API = {
-    me: 'me'
+    me: 'me',
+    entries: 'entries',
+    budgets: 'budgets'
 };
 
 module.exports = {

@@ -25,7 +25,9 @@ async function infiniteRequest(api, token, params = {}, page = 0, per_page = 500
 const apiRequest = (api, token, params) => infiniteRequest(api, token, params);
 
 module.exports = Object.assign({
-    me: token => apiRequest(API.me, token)
+    me: token => apiRequest(API.me, token),
+    entries: (token, from, to) => apiRequest(API.entries, token, { from, to }),
+    budgets: (token, from, to) => apiRequest(API.budgets, token, { from, to })
 }, {
     request,
     infiniteRequest,
