@@ -37,3 +37,5 @@ Object.assign(packageJson, {
 });
 
 writeFile('./package.json', JSON.stringify(packageJson));
+
+console.log('clean up: done...');

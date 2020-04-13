@@ -5,3 +5,5 @@ async function fetchJson(api, token) {
 }
 
 export const login = token => fetchJson('login', token);
+
+export const loadBudgets = token => fetchJson('budgets', token);

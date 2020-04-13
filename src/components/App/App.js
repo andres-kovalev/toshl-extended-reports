@@ -4,7 +4,9 @@ import { Provider } from 'react-redux';
 
 import { store } from '../../store';
 
+import BudgetList from '../BudgetList';
 import Login from '../Login';
+import RequireLogin from '../RequireLogin';
 
 export default function App() {
     return (
@@ -13,6 +15,11 @@ export default function App() {
                 <Switch>
                     <Route path='/login'>
                         <Login />
+                    </Route>
+                    <Route path='/budgets'>
+                        <RequireLogin>
+                            <BudgetList />
+                        </RequireLogin>
                     </Route>
                     <Route path='/'>
                         <Redirect to='/budgets' />
