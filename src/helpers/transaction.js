@@ -1,5 +1,5 @@
 const isTransaction = ({ transaction }) => !transaction;
-const isExpense = entry => entry.amount < 0 && isTransaction(entry);
+const isExpense = (entry) => entry.amount < 0 && isTransaction(entry);
 
 const normalizeTransaction = ({ date, account, category, tags, amount, currency }) => ({
     date,
@@ -12,4 +12,4 @@ const normalizeTransaction = ({ date, account, category, tags, amount, currency 
 module.exports = {
     isExpense,
     normalizeTransaction
-}
+};

@@ -8,10 +8,16 @@ app.get(/\/api\/([a-z/]*)$/, (req, res) => {
 
     try {
         try {
-            return res.status(200).json(require(`./mock/${api}.json`));
-        } catch {}
+            // eslint-disable-next-line global-require, import/no-dynamic-require
+            res.status(200).json(require(`./mock/${ api }.json`));
 
-        const apiFunction = require(`../api/${api}`);
+            return;
+        } catch {
+            // no error handling
+        }
+
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        const apiFunction = require(`../api/${ api }`);
 
         if (typeof apiFunction !== 'function') {
             throw new Error('Requested API is not found!');
@@ -22,7 +28,7 @@ app.get(/\/api\/([a-z/]*)$/, (req, res) => {
         console.error(e.message);
 
         res.status(200).json({
-            error: `Error occurred while trying to access "${api}"!`
+            error: `Error occurred while trying to access "${ api }"!`
         });
     }
 });
@@ -30,4 +36,3 @@ app.get(/\/api\/([a-z/]*)$/, (req, res) => {
 app.listen(PORT, () => {
     console.log(`served on ${ PORT }...`);
 });
-

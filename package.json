@@ -1,6 +1,6 @@
 {
   "name": "toshl-extended-report",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "App with several extensions for Toshl",
   "main": "index.js",
   "dependencies": {
@@ -9,7 +9,7 @@
     "classnames": "2.2.6",
     "node-fetch": "^2.6.0",
     "node-sass": "4.13.0",
-    "prop-types": "15.7.2",
+    "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-jss": "10.0.0",
@@ -30,7 +30,8 @@
     "prepush": "npm run lint",
     "clean": "node ./tools/clean.js",
     "stage": "npm run clean && node ./tools/stage.js",
-    "deploy": "npm run clean && now --name $NOW_PROJECT --token=$NOW_TOKEN --prod"
+    "deploy": "npm run clean && now --name $NOW_PROJECT --token=$NOW_TOKEN --prod",
+    "prepare:release": "standard-version -t ''"
   },
   "repository": {
     "type": "git",
@@ -58,6 +59,7 @@
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.19.0",
+    "express": "^4.17.1",
     "husky": "4.2.5",
     "now": "16.1.2",
     "standard-version": "^7.1.0"
@@ -82,6 +84,42 @@
       "pre-commit": "npm run precommit",
       "pre-push": "npm run prepush"
     }
+  },
+  "standard-version": {
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "chore",
+        "hidden": true
+      },
+      {
+        "type": "docs",
+        "hidden": true
+      },
+      {
+        "type": "style",
+        "hidden": true
+      },
+      {
+        "type": "refactor",
+        "section": "Improvements"
+      },
+      {
+        "type": "perf",
+        "section": "Improvements"
+      },
+      {
+        "type": "test",
+        "hidden": true
+      }
+    ]
   },
   "proxy": "http://localhost:9000"
 }

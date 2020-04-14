@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const buildQueryString = (params = {}) => Object.keys(params)
     .map(
-        param => `${ param }=${ params[param] }`
+        (param) => `${ param }=${ params[param] }`
     ).join('&');
 
 const request = async (host, params, headers = {}) => {
@@ -23,4 +23,4 @@ const requestJson = async (host, params, headers) => (await request(host, params
 
 module.exports = {
     requestJson
-}
+};

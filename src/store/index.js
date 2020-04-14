@@ -8,4 +8,4 @@ const reducer = combineReducers({
     budgets
 });
 
-export const store = configureStore({ reducer });
+export default configureStore({ reducer });

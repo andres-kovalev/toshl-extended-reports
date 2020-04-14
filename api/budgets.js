@@ -18,7 +18,7 @@ module.exports = async ({ query }, res) => {
     const { token, start, end } = query;
 
     res.status(200).json(await budgets(token, start, end));
-}
+};
 
 async function budgets(token, start, end) {
     try {
@@ -30,12 +30,12 @@ async function budgets(token, start, end) {
         const startDate = start || today;
         const endDate = end || today;
 
-        const budgets = await ToshlAPI.budgets(token, startDate, endDate);
+        const budgetItmes = await ToshlAPI.budgets(token, startDate, endDate);
         const todayExpenses = (await ToshlAPI.entries(token, today, today))
             .filter(isExpense)
             .map(normalizeTransaction);
 
-        return budgets.map(formatBudget(todayExpenses));
+        return budgetItmes.map(formatBudget(todayExpenses));
     } catch (e) {
         return {
             error: e.message
@@ -45,6 +45,7 @@ async function budgets(token, start, end) {
 
 function formatBudget(todayExpenses) {
     return (data) => {
+        // eslint-disable-next-line camelcase
         const { id, name, from, to, limit, rollover_amount = 0, amount: spent } = data;
         const budget = limit + rollover_amount; // eslint-disable-line camelcase
         const budgetExpenses = todayExpenses.filter(createBudgetFilter(data));
@@ -74,7 +75,7 @@ function formatBudget(todayExpenses) {
             average: createIndicator(avgBudgetPerDay, spentToday),
             prediction: createIndicator(budget, spentPrediction),
             full: createIndicator(budget, spent)
-        }
+        };
 
         return { id, name, limit, indicators, isPrimary: isPrimary(data) };
     };
@@ -114,9 +115,8 @@ function createIndicator(budget, spent) {
 
 function isPrimary(budget) {
     return !Object.keys(filterTypes).some(
-        filterType => Object.keys(filterFields).some(
-            filterField => `${ filterType }${ filterField }` in budget
+        (filterType) => Object.keys(filterFields).some(
+            (filterField) => `${ filterType }${ filterField }` in budget
         )
     );
 }
-

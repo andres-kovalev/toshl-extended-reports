@@ -14,7 +14,7 @@ export const {
 });
 
 export function loadBudgets(token, callback) {
-    return async dispatch => {
+    return async (dispatch) => {
         const budgets = await API.loadBudgets(token);
 
         if (!budgets.error) {
@@ -26,6 +26,6 @@ export function loadBudgets(token, callback) {
 }
 
 export const budgetsSelector = createSelector(
-    state => state,
-    state => state.budgets
+    (state) => state,
+    (state) => state.budgets
 );
