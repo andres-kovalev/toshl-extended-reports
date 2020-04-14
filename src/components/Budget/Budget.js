@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import styles from './Budget.module.scss';
@@ -22,3 +23,16 @@ export default function Budget({ budget }) {
         </article>
     );
 }
+
+const indicatorProp = PropTypes.shape({
+    rest: PropTypes.number.isRequired
+});
+
+Budget.propTypes = {
+    budget: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        indicators: PropTypes.shape({
+            adaptive: indicatorProp
+        }).isRequired
+    }).isRequired
+};

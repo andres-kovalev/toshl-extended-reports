@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-import Budget from '../Budget';
+import { Budget } from '..';
 import { loadBudgets, budgetsSelector } from '../../store/budgets';
 import { tokenSelector } from '../../store/login';
 
@@ -25,14 +25,14 @@ export default function BudgetList() {
 
         setIsLoading(true);
 
-        dispatch(loadBudgets(token, result => {
+        dispatch(loadBudgets(token, (result) => {
             if (result.error) {
                 setError(result.error);
             }
 
             setIsLoading(false);
         }));
-    }, []);
+    }, [ budgets, dispatch, token ]);
 
     if (error) {
         return (
@@ -41,7 +41,7 @@ export default function BudgetList() {
                 {' '}
                 { error }
             </div>
-        )
+        );
     }
 
     if (isLoading) {
@@ -56,5 +56,5 @@ export default function BudgetList() {
                 <Budget key={ id } budget={ budget } />
             )) }
         </React.Fragment>
-    )
+    );
 }

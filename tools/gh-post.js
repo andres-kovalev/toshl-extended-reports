@@ -14,8 +14,8 @@ const API = {
     }),
     get: (url, args = {}) => fetch(url, { method: 'GET', headers: API.getAuthHeader(), ...args }),
     post: (url, args = {}) => fetch(url, { method: 'POST', headers: API.getAuthHeader(), ...args }),
-    comment: body => API.post(
-        `${API.base}/repos/${OWNER}/${REPO}/issues/${PR_NUMBER}/comments`,
+    comment: (body) => API.post(
+        `${ API.base }/repos/${ OWNER }/${ REPO }/issues/${ PR_NUMBER }/comments`,
         {
             body: JSON.stringify({ body })
         }

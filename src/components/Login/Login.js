@@ -15,21 +15,21 @@ export default function Login() {
     const [ error, setError ] = useState('');
     const dispatch = useDispatch();
 
-    const handleSubmit = useCallback(event => {
+    const handleSubmit = useCallback((event) => {
         event.preventDefault();
 
         setIsLoading(true);
 
-        const token = ref.current.value;
+        const userToken = ref.current.value;
 
-        dispatch(login(token, ({ error }) => {
-            if (error) {
-                setError(error);
+        dispatch(login(userToken, (result) => {
+            if (result.error) {
+                setError(result.error);
             }
 
             setIsLoading(false);
         }));
-    }, []);
+    }, [ dispatch ]);
 
     if (token) {
         return (

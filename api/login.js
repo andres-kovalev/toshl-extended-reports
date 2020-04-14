@@ -2,7 +2,7 @@ const ToshlAPI = require('../src/helpers/toshl');
 
 module.exports = async ({ query }, res) => {
     res.status(200).json(await login(query.token));
-}
+};
 
 async function login(token) {
     try {

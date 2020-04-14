@@ -18,7 +18,7 @@ export const {
 });
 
 export function login(token, callback) {
-    return async dispatch => {
+    return async (dispatch) => {
         const result = await API.login(token);
 
         if (!result.error) {
@@ -32,6 +32,6 @@ export function login(token, callback) {
 }
 
 export const tokenSelector = createSelector(
-    state => state.login,
-    login => login.token
+    (state) => state.login,
+    (state) => state.token
 );

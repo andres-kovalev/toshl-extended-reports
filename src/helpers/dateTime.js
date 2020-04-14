@@ -4,7 +4,7 @@ const padLeft = (str, length, pad) => `${ new Array(
     .fill(pad)
     .join('') }${ str }`.substr(-length);
 
-const dateToStr = date => [
+const dateToStr = (date) => [
     date.getFullYear(),
     padLeft(date.getMonth() + 1, 2, '0'),
     padLeft(date.getDate(), 2, '0')
