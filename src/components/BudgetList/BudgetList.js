@@ -52,9 +52,13 @@ export default function BudgetList() {
 
     return (
         <React.Fragment>
-            { budgets.map(({ id, ...budget }) => (
+            { [ ...budgets ].sort(byPriority).map(({ id, ...budget }) => (
                 <Budget key={ id } budget={ budget } />
             )) }
         </React.Fragment>
     );
+}
+
+function byPriority(budget1, budget2) {
+    return budget2.isPrimary - budget1.isPrimary;
 }
