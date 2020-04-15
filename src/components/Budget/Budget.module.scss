@@ -18,3 +18,28 @@
     font-size: 2rem;
     font-weight: bold;
 }
+
+.details {
+    display: flex;
+    justify-content: space-around;
+    font-size: 2rem;
+}
+
+.prediction {
+    font-size: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .details {
+        flex-direction: column;
+        font-size: 1.5rem;
+    }
+
+    .rests, .prediction {
+        font-size: 1.2rem;
+    }
+
+    .rests {
+        font-weight: bold;
+    }
+}

@@ -116,6 +116,10 @@
         "section": "Improvements"
       },
       {
+        "type": "improve",
+        "section": "Improvements"
+      },
+      {
         "type": "test",
         "hidden": true
       }
