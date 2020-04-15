@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/andres-kovalev/toshl-extended-report/compare/1.0.0...1.1.0) (2020-04-15)
+
+
+### Features
+
+* extended Budget feature with details ([7a52b9e](https://github.com/andres-kovalev/toshl-extended-report/commit/7a52b9e2819eef5a3bbbc8bdd196eab225d16cc3))
+
+
+### Improvements
+
+* reorder budgets to show main budget first ([6e48744](https://github.com/andres-kovalev/toshl-extended-report/commit/6e4874432f3c7776bb874fe9608b0a37aca2569b))
+
 ## 1.0.0 (2020-04-14)
 
 
