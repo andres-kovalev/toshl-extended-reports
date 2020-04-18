@@ -29,13 +29,15 @@ const indicatorProp = PropTypes.shape({
     rest: PropTypes.number.isRequired
 });
 
-Budget.propTypes = {
-    budget: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        indicators: PropTypes.shape({
-            adaptive: indicatorProp
-        }).isRequired
+export const BudgetShape = PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    indicators: PropTypes.shape({
+        adaptive: indicatorProp
     }).isRequired
+});
+
+Budget.propTypes = {
+    budget: BudgetShape.isRequired
 };
 
 function renderBudgetContent(indicators, isExpanded) {
