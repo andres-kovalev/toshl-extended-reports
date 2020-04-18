@@ -1,6 +1,6 @@
 {
   "name": "toshl-extended-report",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "App with several extensions for Toshl",
   "main": "index.js",
   "dependencies": {

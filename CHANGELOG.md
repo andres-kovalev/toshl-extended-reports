@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/andres-kovalev/toshl-extended-report/compare/1.1.0...1.2.0) (2020-04-18)
+
+
+### Features
+
+* added loading screen ([ab3c9c0](https://github.com/andres-kovalev/toshl-extended-report/commit/ab3c9c0e34cb1abf248b29feeb150d079754d4cf))
+* added pull-to-refresh feature ([5d2af0b](https://github.com/andres-kovalev/toshl-extended-report/commit/5d2af0b82ec1f3eee6ee76df0f64536404c45f47))
+
 ## [1.1.0](https://github.com/andres-kovalev/toshl-extended-report/compare/1.0.0...1.1.0) (2020-04-15)
 
 
