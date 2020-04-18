@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { Budget } from '..';
+import { Budget, Loading } from '..';
 import { loadBudgets, budgetsSelector } from '../../store/budgets';
 import { tokenSelector } from '../../store/login';
 
@@ -45,9 +45,7 @@ export default function BudgetList() {
     }
 
     if (isLoading) {
-        return (
-            <div>loading...</div>
-        );
+        return <Loading />;
     }
 
     return (

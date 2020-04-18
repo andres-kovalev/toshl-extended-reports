@@ -9,7 +9,12 @@ app.get(/\/api\/([a-z/]*)$/, (req, res) => {
     try {
         try {
             // eslint-disable-next-line global-require, import/no-dynamic-require
-            res.status(200).json(require(`./mock/${ api }.json`));
+            const mocked = require(`./mock/${ api }.json`);
+
+            setTimeout(
+                () => res.status(200).json(mocked),
+                1000
+            );
 
             return;
         } catch {
