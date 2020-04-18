@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { Budget, Loading } from '..';
+import { Loading } from '..';
+import BudgetListContainer from './BudgetListContainer';
 import { loadBudgets, budgetsSelector } from '../../store/budgets';
 import { tokenSelector } from '../../store/login';
 
@@ -18,11 +19,7 @@ export default function BudgetList() {
     const [ isLoading, setIsLoading ] = useState(!budgets);
     const [ error, setError ] = useState('');
 
-    useEffect(() => {
-        if (budgets) {
-            return;
-        }
-
+    const refresh = () => {
         setIsLoading(true);
 
         dispatch(loadBudgets(token, (result) => {
@@ -32,31 +29,25 @@ export default function BudgetList() {
 
             setIsLoading(false);
         }));
-    }, [ budgets, dispatch, token ]);
+    };
 
-    if (error) {
-        return (
-            <div>
-                <strong>error:</strong>
-                {' '}
-                { error }
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (budgets) {
+            return;
+        }
+
+        refresh();
+    }, [ budgets, dispatch, refresh, token ]);
 
     if (isLoading) {
         return <Loading />;
     }
 
     return (
-        <React.Fragment>
-            { [ ...budgets ].sort(byPriority).map(({ id, ...budget }) => (
-                <Budget key={ id } budget={ budget } />
-            )) }
-        </React.Fragment>
+        <BudgetListContainer
+            error={ error }
+            budgets={ budgets }
+            loadBudgets={ refresh }
+        />
     );
-}
-
-function byPriority(budget1, budget2) {
-    return budget2.isPrimary - budget1.isPrimary;
 }
