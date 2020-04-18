@@ -7,7 +7,7 @@ import styles from './BudgetListContainer.module.scss';
 import Budget, { BudgetShape } from './Budget';
 import { usePullToRefresh } from '../../hooks';
 
-const transformLoader = (x) => `translateY(${ x * 2 }px) scale(${ x / 100 }) rotate(${ x * 1.8 }deg)`;
+const transformLoader = (x) => `translateY(${ x * 2 }px) scale(${ Math.min(1, x / 50) }) rotate(${ x * 3.6 }deg)`;
 
 export default function BudgetListContainer({ error, budgets, loadBudgets }) {
     const [ ref, overpull ] = usePullToRefresh(loadBudgets, 100);
