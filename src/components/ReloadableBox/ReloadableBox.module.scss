@@ -1,0 +1,33 @@
+.container {
+    height: 100%;
+    overflow: auto;
+}
+
+.loader {
+    height: 0;
+    display: flex;
+    justify-content: center;
+
+    .spinner {
+        --margin: 20px;
+        --size: calc(100% - var(--margin) * 2);
+
+        display: flex;
+        justify-content: center;
+        height: var(--size);
+        margin: var(--margin);
+    }
+
+    svg {
+        height: 100%;
+
+        &.loading {
+            animation: rotation 1s infinite linear;
+        }
+    }
+}
+
+@keyframes rotation {
+    from { transform: rotate(0); }
+    to { transform: rotate(360deg); }
+}
