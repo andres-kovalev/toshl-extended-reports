@@ -1,0 +1,38 @@
+.budget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.1rem;
+    padding: 0.5rem;
+    color: white;
+    background-color: #aaa;
+    text-align: center;
+    animation: skeleton-bg 1.5s infinite ease-in-out;
+}
+
+.title {
+    width: 4rem;
+    height: 1.5rem;
+    margin: 0.8rem;
+    border-radius: 1rem;
+    animation: skeleton 1.5s infinite ease-in-out;
+}
+
+.rest {
+    width: 6rem;
+    height: 3rem;
+    border-radius: 1rem;
+    animation: skeleton 1.5s infinite ease-in-out;
+}
+
+@keyframes skeleton {
+    from { background-color: #a0a0a0; }
+    50% { background-color: #888; }
+    to { background-color: #a0a0a0; }
+}
+
+@keyframes skeleton-bg {
+    from { background-color: #aaa; }
+    50% { background-color: #a8a8a8; }
+    to { background-color: #aaa; }
+}
