@@ -8,7 +8,7 @@ import { login, tokenSelector } from '../../store/login';
 import styles from './Login.module.scss';
 import logo from '../../assets/logo512.png';
 
-export default function Login() {
+export function Login() {
     const token = useSelector(tokenSelector);
     const ref = useRef();
     const [ isLoading, setIsLoading ] = useState(false);

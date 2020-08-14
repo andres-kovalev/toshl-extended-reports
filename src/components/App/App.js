@@ -1,12 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import store from '../../store';
 
-import { BudgetList, Login, RequireLogin } from '..';
+import { Login } from '../Login';
+import { RequireLogin } from '../RequireLogin';
+import { Main } from '../Main';
 
-export default function App() {
+export function App() {
     return (
         <Router>
             <Provider store={ store }>
@@ -14,13 +16,10 @@ export default function App() {
                     <Route path='/login'>
                         <Login />
                     </Route>
-                    <Route path='/budgets'>
+                    <Route exact={ false } path='/'>
                         <RequireLogin>
-                            <BudgetList />
+                            <Main />
                         </RequireLogin>
-                    </Route>
-                    <Route path='/'>
-                        <Redirect to='/budgets' />
                     </Route>
                 </Switch>
             </Provider>
