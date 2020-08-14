@@ -62,7 +62,7 @@
     "express": "^4.17.1",
     "husky": "4.2.5",
     "now": "16.1.2",
-    "standard-version": "^7.1.0"
+    "standard-version": "^8.0.1"
   },
   "eslintConfig": {
     "extends": "react-app"
