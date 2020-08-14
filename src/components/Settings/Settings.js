@@ -1,0 +1,48 @@
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
+
+import { saveHidden, hiddenSelector } from '../../store/settings';
+import { budgetsSelector } from '../../store/budgets';
+
+import { Checkbox } from './Checkbox';
+
+const selector = createSelector(
+    budgetsSelector,
+    hiddenSelector,
+    (budgets, hidden) => ({ budgets, hidden })
+);
+
+export function Settings() {
+    const budgets = [ { id: '2334593-24', name: 'Одежда', limit: 500, indicators: { adaptive: { budget: 30.4, spent: 0, rest: 30.4 }, optimistic: { budget: 237.13, spent: 0, rest: 237.13 }, average: { budget: 18.24, spent: 0, rest: 18.24 }, prediction: { budget: 547.23, spent: 0, rest: 547.23 }, full: { budget: 547.23, spent: 0, rest: 547.23 } }, isPrimary: false }, { id: '2334424-24', name: 'Все расходы', limit: 15000, indicators: { adaptive: { budget: 2231.47, spent: 0, rest: 2231.47 }, optimistic: { budget: 13511.52, spent: 0, rest: 13511.52 }, average: { budget: 1567.94, spent: 0, rest: 1567.94 }, prediction: { budget: 47038.24, spent: 17179.3, rest: 29858.94 }, full: { budget: 47038.24, spent: 6871.72, rest: 40166.52 } }, isPrimary: true }, { id: '2334426-24', name: 'Фиксированные расходы', limit: 3300, indicators: { adaptive: { budget: 26.3, spent: 0, rest: 26.3 }, optimistic: { budget: -1423.35, spent: 0, rest: -1423.35 }, average: { budget: 111.57, spent: 0, rest: 111.57 }, prediction: { budget: 3347.06, spent: 7184.35, rest: -3837.29 }, full: { budget: 3347.06, spent: 2873.74, rest: 473.32 } }, isPrimary: false }, { id: '2334489-24', name: 'Продукты', limit: 1100, indicators: { adaptive: { budget: 22.94, spent: 0, rest: 22.94 }, optimistic: { budget: -91.66, spent: 0, rest: -91.66 }, average: { budget: 29.68, spent: 0, rest: 29.68 }, prediction: { budget: 890.44, spent: 1193.8, rest: -303.36 }, full: { budget: 890.44, spent: 477.52, rest: 412.92 } }, isPrimary: false }, { id: '2456562-24', name: 'Остальное', limit: 1500, indicators: { adaptive: { budget: -4.77, spent: 0, rest: -4.77 }, optimistic: { budget: -1400.29, spent: 0, rest: -1400.29 }, average: { budget: 77.32, spent: 0, rest: 77.32 }, prediction: { budget: 2319.63, spent: 6013.65, rest: -3694.02 }, full: { budget: 2319.63, spent: 2405.46, rest: -85.83 } }, isPrimary: false }, { id: '2334587-24', name: 'Траты накоплений', limit: 5600, indicators: { adaptive: { budget: 313.61, spent: 0, rest: 313.61 }, optimistic: { budget: 2446.19, spent: 0, rest: 2446.19 }, average: { budget: 188.17, spent: 0, rest: 188.17 }, prediction: { budget: 5645.05, spent: 0, rest: 5645.05 }, full: { budget: 5645.05, spent: 0, rest: 5645.05 } }, isPrimary: false }, { id: '2334592-24', name: 'Кафе и рестораны', limit: 500, indicators: { adaptive: { budget: 92.99, spent: 0, rest: 92.99 }, optimistic: { budget: 660.16, spent: 0, rest: 660.16 }, average: { budget: 59.63, spent: 0, rest: 59.63 }, prediction: { budget: 1788.83, spent: 287.5, rest: 1501.33 }, full: { budget: 1788.83, spent: 115, rest: 1673.83 } }, isPrimary: false }, { id: '2505595-24', name: 'Пенсионные накопления', limit: 1500, indicators: { adaptive: { budget: 1750, spent: 0, rest: 1750 }, optimistic: { budget: 13650, spent: 0, rest: 13650 }, average: { budget: 1050, spent: 0, rest: 1050 }, prediction: { budget: 31500, spent: 0, rest: 31500 }, full: { budget: 31500, spent: 0, rest: 31500 } }, isPrimary: false } ];
+    const { hidden } = useSelector(selector);
+    const dispatch = useDispatch();
+
+    const hiddenSet = new Set(hidden);
+
+    return (
+        <React.Fragment>
+            { budgets.map(({ id, name }) => {
+                const checked = !hiddenSet.has(id);
+
+                return (
+                    <Checkbox
+                        key={ id }
+                        id={ id }
+                        label={ name }
+                        checked={ checked }
+                        onChange={() => {
+                            const newHidden = checked
+                                ? hidden.concat([ id ])
+                                : hidden.filter(
+                                    (hiddenId) => hiddenId !== id
+                                );
+
+                            dispatch(saveHidden(newHidden));
+                        }}
+                    />
+                );
+            }) }
+        </React.Fragment>
+    );
+}

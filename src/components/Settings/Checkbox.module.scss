@@ -1,0 +1,20 @@
+.checkbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 32px;
+    padding: 32px;
+    color: #929292;
+
+    &.checked {
+        color: black;
+    }
+
+    svg {
+        height: 100%;
+    }
+
+    label {
+        margin-left: 16px;
+    }
+}
