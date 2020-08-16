@@ -12,17 +12,20 @@
 }
 
 .nav {
-    height: 64px;
+    height: 4rem;
+    padding-bottom: 1rem;
     display: flex;
+    align-items: center;
     background-color: white;
-    box-shadow: 0px -1px 10px 0px #00000085;
+    box-shadow: 0 -1px 0.5rem 0 #00000085;
     z-index: 1;
 }
 
 .navItem {
     display: block;
     flex-grow: 1;
-    padding: 16px;
+    height: 2rem;
+    padding: 0.5rem 0;
     color: grey;
     text-align: center;
 

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { ReloadableBox } from '../ReloadableBox';
+import { Placeholder } from '../Placeholder';
 import { tokenSelector } from '../../store/login';
 import { loadBudgets, budgetsSelector } from '../../store/budgets';
 import { hiddenSelector } from '../../store/settings';
@@ -57,13 +58,17 @@ export const Budgets = () => {
     const itemsToLoad = (isLoading ? [] : (budgets || []))
         .filter(({ id }) => !hidden.includes(id))
         .sort(byPriority);
+    const loadedContent = budgets && budgets.length
+        ? itemsToLoad.map(({ id, ...budget }) => (
+            <Budget key={ id } budget={ budget } />
+        )) : <Placeholder label='No budgets' />;
+    const content = isLoading
+        ? loadingContent
+        : loadedContent;
 
     return (
         <ReloadableBox loading={ isLoading && !firstLoad } reload={ reload } >
-            { isLoading && loadingContent }
-            {itemsToLoad.map(({ id, ...budget }) => (
-                <Budget key={ id } budget={ budget } />
-            ))}
+            { content }
         </ReloadableBox>
     );
 };

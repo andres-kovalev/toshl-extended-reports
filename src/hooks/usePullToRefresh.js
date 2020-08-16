@@ -13,6 +13,7 @@ export default function usePullToRefresh(refresh, loading, pullLength = 100) {
 
         const container = ref.current;
         let scroll = null;
+        let overpull = 0;
 
         const handleTouchMove = (event) => {
             const { touches } = event;
@@ -23,21 +24,22 @@ export default function usePullToRefresh(refresh, loading, pullLength = 100) {
                     scroll = y;
                 }
 
-                const overpull = y - scroll;
+                overpull = y - scroll;
                 if (overpull > 0) {
                     event.preventDefault();
                 }
 
                 setProps({ overpull });
-
-                if (refresh && overpull >= pullLength) {
-                    refresh();
-                }
             }
         };
         const handleTouchEnd = () => {
             scroll = null;
-            setProps({ overpull: 0 });
+
+            if (refresh && overpull >= pullLength) {
+                refresh();
+            } else {
+                setProps({ overpull: 0 });
+            }
         };
 
         container.addEventListener('touchmove', handleTouchMove, { passive: false });
