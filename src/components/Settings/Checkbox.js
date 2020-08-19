@@ -21,7 +21,7 @@ export const Checkbox = ({ id, label, checked, onChange }) => {
                 aria-checked={ checked }
                 onClick={ onChange }
             />
-            <label for={id} onClick={ onChange }>{label}</label>
+            <label htmlFor={id} onClick={ onChange }>{label}</label>
         </div>
     );
 };

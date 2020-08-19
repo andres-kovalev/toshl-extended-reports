@@ -7,12 +7,11 @@
     height: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
 
     .spinner {
         display: flex;
         justify-content: center;
-        align-items: center;
         width: 0;
         height: 0;
     }

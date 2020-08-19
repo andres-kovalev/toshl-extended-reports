@@ -33,13 +33,15 @@ export default function usePullToRefresh(refresh, loading, pullLength = 100) {
             }
         };
         const handleTouchEnd = () => {
-            scroll = null;
-
             if (refresh && overpull >= pullLength) {
                 refresh();
+                setProps({ overpull: pullLength });
             } else {
                 setProps({ overpull: 0 });
             }
+
+            scroll = null;
+            overpull = 0;
         };
 
         container.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -53,11 +55,7 @@ export default function usePullToRefresh(refresh, loading, pullLength = 100) {
 
     return [
         ref,
-        props.overpull.interpolate({
-            range: [ 0, pullLength ],
-            output: [ 0, 100 ],
-            extrapolate: 'clamp'
-        }),
+        props.overpull,
         reset
     ];
 }
