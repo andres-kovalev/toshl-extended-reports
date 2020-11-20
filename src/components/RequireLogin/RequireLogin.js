@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 import { tokenSelector } from '../../store/login';
 
-export default function RequireLogin({ children }) {
+export function RequireLogin({ children }) {
     const token = useSelector(tokenSelector);
 
     if (token) {

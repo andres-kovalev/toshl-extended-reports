@@ -1,0 +1,39 @@
+.container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.body {
+    flex-grow: 1;
+    background-color: #fafafa;
+    overflow-y: auto;
+}
+
+.nav {
+    height: 4rem;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 -1px 0.5rem 0 #00000085;
+    z-index: 1;
+}
+
+.navItem {
+    display: block;
+    flex-grow: 1;
+    height: 2rem;
+    padding: 0.5rem 0;
+    color: grey;
+    text-align: center;
+
+    &.active {
+        color: #0c6ad6;
+    }
+
+    svg {
+        height: 100%;
+    }
+}

@@ -1,0 +1,19 @@
+.checkbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: #929292;
+
+    &.checked {
+        color: black;
+    }
+
+    svg {
+        height: 2rem;
+    }
+
+    label {
+        margin-left: 1rem;
+    }
+}

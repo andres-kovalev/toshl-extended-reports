@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import styles from './Budget.module.scss';
 
-export default function Budget({ budget }) {
+export function Budget({ budget }) {
     const [ isExpanded, setIsExpanded ] = useState(false);
     const toggle = () => setIsExpanded((state) => !state);
 
