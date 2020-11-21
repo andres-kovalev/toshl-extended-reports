@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/andres-kovalev/toshl-extended-report/compare/1.2.1...1.3.0) (2020-11-21)
+
+
+### Features
+
+* add splash screen for iPhone ([3075b03](https://github.com/andres-kovalev/toshl-extended-report/commit/3075b031b1cf438cfb95f65801d73918586adcf9))
+* add total endpoint ([b419580](https://github.com/andres-kovalev/toshl-extended-report/commit/b419580aa91584f750a8792655b77e2c27c00c67))
+* implement Budgets component ([002e3db](https://github.com/andres-kovalev/toshl-extended-report/commit/002e3dbb38ecfde8c6a68bae2231d57f6cdf6ef8))
+* implement icons component ([be1199f](https://github.com/andres-kovalev/toshl-extended-report/commit/be1199f73c3e6d173c0e0ac85ab6b8fc260226ad))
+* implement ReloadableBox component ([a9f96b9](https://github.com/andres-kovalev/toshl-extended-report/commit/a9f96b9189992b9e59d0412c55880e7d20304c84))
+* implement Settings component ([ad9ba2e](https://github.com/andres-kovalev/toshl-extended-report/commit/ad9ba2e3dc5fa1045565f94e94647eac8997c3d8))
+* implemented total page ([5b42620](https://github.com/andres-kovalev/toshl-extended-report/commit/5b426205c0a18918d10a8ffbffeea00b01ad5d9e))
+* implment new version ([085389d](https://github.com/andres-kovalev/toshl-extended-report/commit/085389dd854e10f79c07de16e84bdb9cb84594ec))
+
+
+### Bug Fixes
+
+* lint rules configuration ([8ee6340](https://github.com/andres-kovalev/toshl-extended-report/commit/8ee6340094ac6dd91c772b49fd4bb2aea8cf2fba))
+
 ### [1.2.1](https://github.com/andres-kovalev/toshl-extended-report/compare/1.2.0...1.2.1) (2020-04-18)
 
 ## [1.2.0](https://github.com/andres-kovalev/toshl-extended-report/compare/1.1.0...1.2.0) (2020-04-18)
