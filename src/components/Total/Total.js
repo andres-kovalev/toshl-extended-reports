@@ -52,10 +52,11 @@ export const Total = () => {
     }
 
     const multiplier = rates[selectedCurrency];
-    const total = totals.map(
-        ({ currency, amount }) => (rates[currency]
-            ? amount / rates[currency]
-            : 0)
+    const existingTotals = totals.filter(
+        ({ currency }) => (currency in rates)
+    );
+    const total = existingTotals.map(
+        ({ currency, amount }) => amount / rates[currency]
     ).reduce(sum);
 
     return (
@@ -65,7 +66,7 @@ export const Total = () => {
                     { round(total * multiplier, 2) } { selectedCurrency }
                 </h2>
                 <div className={ styles.totals }>
-                    { totals.map(({ amount, currency }) => (
+                    { existingTotals.map(({ amount, currency }) => (
                         <div key={ currency } className={ styles.amount }>
                             { round(amount, 2) }
                             <button

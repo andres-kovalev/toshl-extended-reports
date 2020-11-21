@@ -4,6 +4,10 @@
         "amount": 456
     },
     {
+        "currency": "BAM",
+        "amount": 123
+    },
+    {
         "currency": "HRK",
         "amount": 789
     },
