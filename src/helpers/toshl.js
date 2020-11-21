@@ -29,6 +29,7 @@ module.exports = {
     me: (token) => apiRequest(API.me, token),
     entries: (token, from, to) => apiRequest(API.entries, token, { from, to }),
     budgets: (token, from, to) => apiRequest(API.budgets, token, { from, to }),
+    accounts: (token) => apiRequest(API.accounts, token),
     request,
     infiniteRequest,
     apiRequest

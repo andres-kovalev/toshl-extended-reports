@@ -1,0 +1,26 @@
+[
+    {
+        "currency": "HUF",
+        "amount": 456
+    },
+    {
+        "currency": "HRK",
+        "amount": 789
+    },
+    {
+        "currency": "USD",
+        "amount": 101112
+    },
+    {
+        "currency": "EUR",
+        "amount": 926.68
+    },
+    {
+        "currency": "RUB",
+        "amount": 1911994.58
+    },
+    {
+        "currency": "PLN",
+        "amount": 184146.70000000004
+    }
+]
