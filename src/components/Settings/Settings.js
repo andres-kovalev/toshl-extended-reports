@@ -6,9 +6,7 @@ import { Placeholder } from '../Placeholder';
 import { saveHidden, hiddenSelector } from '../../store/settings';
 import { budgetsSelector } from '../../store/budgets';
 
-import { Checkbox } from './Checkbox';
-
-import styles from './Settings.module.scss';
+import { Checkboxes } from './Checkboxes';
 
 const selector = createSelector(
     budgetsSelector,
@@ -26,31 +24,13 @@ export function Settings() {
         );
     }
 
-    const hiddenSet = new Set(hidden);
-
     return (
-        <div className={ styles.container }>
-            { budgets.map(({ id, name }) => {
-                const checked = !hiddenSet.has(id);
-
-                return (
-                    <Checkbox
-                        key={ id }
-                        id={ id }
-                        label={ name }
-                        checked={ checked }
-                        onChange={() => {
-                            const newHidden = checked
-                                ? hidden.concat([ id ])
-                                : hidden.filter(
-                                    (hiddenId) => hiddenId !== id
-                                );
-
-                            dispatch(saveHidden(newHidden));
-                        }}
-                    />
-                );
-            }) }
-        </div>
+        <Checkboxes
+            items={ budgets }
+            unchecked={ hidden }
+            onChange={
+                (newHiddenBudgets) => dispatch(saveHidden(newHiddenBudgets))
+            }
+        />
     );
 }
