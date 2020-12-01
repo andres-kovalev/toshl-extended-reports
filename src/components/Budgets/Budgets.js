@@ -6,7 +6,7 @@ import { ReloadableBox } from '../ReloadableBox';
 import { Placeholder } from '../Placeholder';
 import { tokenSelector } from '../../store/login';
 import { loadBudgets, budgetsSelector } from '../../store/budgets';
-import { hiddenSelector } from '../../store/settings';
+import { settingsSelector } from '../../store/settings';
 
 import { Budget } from './Budget';
 import { BudgetSkeleton } from './BudgetSkeleton';
@@ -14,8 +14,8 @@ import { BudgetSkeleton } from './BudgetSkeleton';
 const selector = createSelector(
     tokenSelector,
     budgetsSelector,
-    hiddenSelector,
-    (token, budgets, hidden) => ({ token, budgets, hidden })
+    settingsSelector,
+    (token, budgets, { hiddenBudgets }) => ({ token, budgets, hiddenBudgets })
 );
 
 /* eslint-disable react/no-array-index-key */
@@ -30,7 +30,7 @@ const loadingContent = (
 
 export const Budgets = () => {
     const [ isLoading, setIsLoading ] = useState(false);
-    const { token, budgets, hidden } = useSelector(selector);
+    const { token, budgets, hiddenBudgets } = useSelector(selector);
     const dispatch = useDispatch();
     const [ , setError ] = useState('');
 
@@ -56,7 +56,7 @@ export const Budgets = () => {
 
     const firstLoad = isLoading && !budgets;
     const itemsToLoad = (isLoading ? [] : (budgets || []))
-        .filter(({ id }) => !hidden.includes(id))
+        .filter(({ id }) => !hiddenBudgets.includes(id))
         .sort(byPriority);
     const loadedContent = budgets && budgets.length
         ? itemsToLoad.map(({ id, ...budget }) => (

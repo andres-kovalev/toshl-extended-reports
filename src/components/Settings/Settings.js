@@ -4,23 +4,33 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { Placeholder } from '../Placeholder';
-import { saveHidden, hiddenSelector } from '../../store/settings';
+import { saveHiddenAccounts, saveHiddenBudgets, settingsSelector } from '../../store/settings';
 import { budgetsSelector } from '../../store/budgets';
+import { accountsSelector } from '../../store/accounts';
 
 import { Checkboxes } from './Checkboxes';
 import { Item } from './Item';
 
 const selector = createSelector(
     budgetsSelector,
-    hiddenSelector,
-    (budgets, hidden) => ({ budgets, hidden })
+    accountsSelector,
+    settingsSelector,
+    (budgets, { accounts }, { hiddenBudgets, hiddenAccounts }) => ({
+        budgets,
+        accounts,
+        hiddenBudgets,
+        hiddenAccounts
+    })
 );
 
 export function Settings() {
-    const { budgets, hidden } = useSelector(selector);
+    const { budgets, accounts, hiddenBudgets, hiddenAccounts } = useSelector(selector);
     const dispatch = useDispatch();
 
-    if (!budgets || !budgets.length) {
+    const hasBudgets = Boolean(budgets?.length);
+    const hasAccounts = Boolean(accounts?.length);
+
+    if (!hasBudgets && !hasAccounts) {
         return (
             <Placeholder label='Nothing to configure' />
         );
@@ -28,19 +38,35 @@ export function Settings() {
 
     return (
         <Switch>
-            <Route path='/settings/budgets'>
-                <Checkboxes
-                    header='Budgets'
-                    backTo='/settings'
-                    items={ budgets }
-                    unchecked={ hidden }
-                    onChange={
-                        (newHiddenBudgets) => dispatch(saveHidden(newHiddenBudgets))
-                    }
-                />
-            </Route>
+            { hasBudgets && (
+                <Route path='/settings/budgets'>
+                    <Checkboxes
+                        header='Budgets'
+                        backTo='/settings'
+                        items={ budgets }
+                        unchecked={ hiddenBudgets }
+                        onChange={
+                            (newHiddenBudgets) => dispatch(saveHiddenBudgets(newHiddenBudgets))
+                        }
+                    />
+                </Route>
+            ) }
+            { hasAccounts && (
+                <Route path='/settings/accounts'>
+                    <Checkboxes
+                        header='Accounts'
+                        backTo='/settings'
+                        items={ accounts }
+                        unchecked={ hiddenAccounts }
+                        onChange={
+                            (newHiddenAccounts) => dispatch(saveHiddenAccounts(newHiddenAccounts))
+                        }
+                    />
+                </Route>
+            ) }
             <Route path='/settings'>
-                <Item label='Budgets' to='/settings/budgets' />
+                { hasBudgets && <Item label='Budgets' to='/settings/budgets' /> }
+                { hasAccounts && <Item label='Accounts' to='/settings/accounts' /> }
             </Route>
         </Switch>
     );

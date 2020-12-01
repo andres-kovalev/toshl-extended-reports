@@ -1,4 +1,4 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const {
     reducer,
@@ -6,28 +6,38 @@ export const {
 } = createSlice({
     name: 'settings',
     initialState: {
-        hidden: getArray('hidden')
+        hiddenBudgets: getArray('hiddenBudgets'),
+        hiddenAccounts: getArray('hiddenAccounts')
     },
     reducers: {
-        setHidden: (state, action) => ({
+        setHiddenBudgets: (state, action) => ({
             ...state,
-            hidden: action.payload
+            hiddenBudgets: action.payload
+        }),
+        setHiddenAccounts: (state, action) => ({
+            ...state,
+            hiddenAccounts: action.payload
         })
     }
 });
 
-export function saveHidden(hidden) {
+export function saveHiddenBudgets(budgets) {
     return async (dispatch) => {
-        setArray('hidden', hidden);
+        setArray('hiddenBudgets', budgets);
 
-        dispatch(actions.setHidden(hidden));
+        dispatch(actions.setHiddenBudgets(budgets));
     };
 }
 
-export const hiddenSelector = createSelector(
-    (state) => state.settings,
-    (state) => state.hidden
-);
+export function saveHiddenAccounts(accounts) {
+    return async (dispatch) => {
+        setArray('hiddenAccounts', accounts);
+
+        dispatch(actions.setHiddenAccounts(accounts));
+    };
+}
+
+export const settingsSelector = (state) => state.settings;
 
 function getArray(field) {
     return JSON.parse(localStorage.getItem(field) || '[]');

@@ -5,6 +5,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { ReloadableBox } from '../ReloadableBox';
 import { tokenSelector } from '../../store/login';
 import { accountsSelector, loadData, actions } from '../../store/accounts';
+import { settingsSelector } from '../../store/settings';
 import { round } from '../../helpers/math';
 
 import styles from './Total.module.scss';
@@ -12,11 +13,24 @@ import styles from './Total.module.scss';
 const selector = createSelector(
     tokenSelector,
     accountsSelector,
-    (token, { accounts, rates, currency }) => ({ token, accounts, rates, currency })
+    settingsSelector,
+    (token, { accounts, rates, currency }, { hiddenAccounts }) => ({
+        token,
+        accounts,
+        rates,
+        currency,
+        hiddenAccounts
+    })
 );
 
 export const Total = () => {
-    const { token, accounts, rates, currency: selectedCurrency } = useSelector(selector);
+    const {
+        token,
+        accounts,
+        rates,
+        currency: selectedCurrency,
+        hiddenAccounts
+    } = useSelector(selector);
     const dispatch = useDispatch();
     const [ isLoading, setIsLoading ] = useState(!accounts);
     const [ , setError ] = useState('');
@@ -54,7 +68,7 @@ export const Total = () => {
     const multiplier = rates[selectedCurrency];
     const totals = sumByCurrency(
         accounts.filter(
-            ({ currency }) => (currency in rates)
+            ({ id, currency }) => (currency in rates) && !hiddenAccounts.includes(id)
         )
     );
     const total = totals.map(
