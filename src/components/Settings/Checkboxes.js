@@ -1,15 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import * as Icons from '../Icons';
 
 import { Checkbox } from './Checkbox';
 
 import styles from './Checkboxes.module.scss';
 
-export function Checkboxes({ items, unchecked, onChange }) {
+export function Checkboxes({ header, backTo, items, unchecked, onChange }) {
     const uncheckedSet = new Set(unchecked);
 
     return (
         <div className={ styles.container }>
+            <div className={ styles.header }>
+                { backTo && <Link to={ backTo } className={ styles.back }>
+                    <Icons.AngleLeft className={ styles.backIcon } />
+                </Link> }
+                { header }
+            </div>
             { items.map(({ id, name }) => {
                 const checked = !uncheckedSet.has(id);
 
@@ -36,6 +45,8 @@ export function Checkboxes({ items, unchecked, onChange }) {
 }
 
 Checkboxes.propTypes = {
+    header: PropTypes.string.isRequired,
+    backTo: PropTypes.string,
     items: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,
