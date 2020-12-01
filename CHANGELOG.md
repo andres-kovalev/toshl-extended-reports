@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/andres-kovalev/toshl-extended-report/compare/1.3.0...1.4.0) (2020-12-01)
+
+
+### Features
+
+* added account configuration ([f91805d](https://github.com/andres-kovalev/toshl-extended-report/commit/f91805d8b1da316826d6328b434ca79647f61e8e))
+* adjust FE to use accounts end-point instead of totals ([08869ea](https://github.com/andres-kovalev/toshl-extended-report/commit/08869ea025d7ef7891930eb7b0377a7c08ebedd3))
+* redesign settings section ([b799da6](https://github.com/andres-kovalev/toshl-extended-report/commit/b799da6b1bbcc1f2ac0d96f1c40462a853f04da6))
+* replace total end-point with accounts ([2256d2c](https://github.com/andres-kovalev/toshl-extended-report/commit/2256d2c559dd2abe60e15823b979c66078c4b2c7))
+
+
+### Bug Fixes
+
+* fixed loading bug in total section ([d404c5a](https://github.com/andres-kovalev/toshl-extended-report/commit/d404c5af237294bf746fb4b9c2f1f77e7fae2276))
+
 ## [1.3.0](https://github.com/andres-kovalev/toshl-extended-report/compare/1.2.1...1.3.0) (2020-11-21)
 
 
