@@ -16,9 +16,9 @@ const selector = createSelector(
 );
 
 export const Total = () => {
-    const [ isLoading, setIsLoading ] = useState(true);
     const { token, accounts, rates, currency: selectedCurrency } = useSelector(selector);
     const dispatch = useDispatch();
+    const [ isLoading, setIsLoading ] = useState(!accounts);
     const [ , setError ] = useState('');
 
     const reload = useCallback(() => {
