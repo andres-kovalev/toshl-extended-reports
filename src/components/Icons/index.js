@@ -4,3 +4,5 @@ export { Coins } from './Coins';
 export { Box } from './Box';
 export { CheckedBox } from './CheckedBox';
 export { Piggy } from './Piggy';
+export { AngleRight } from './AngleRight';
+export { AngleLeft } from './AngleLeft';

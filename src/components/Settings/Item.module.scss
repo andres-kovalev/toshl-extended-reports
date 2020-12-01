@@ -1,0 +1,23 @@
+.link {
+    text-decoration: none;
+}
+
+.item {
+    --font-size: 1.25rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    padding: 1rem;
+    border-bottom: solid 1px #ccc;
+    font-size: var(--font-size);
+}
+
+.label {
+    text-decoration: none;
+}
+
+.arrow {
+    height: var(--font-size);
+}

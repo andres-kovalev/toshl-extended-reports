@@ -4,27 +4,41 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { ReloadableBox } from '../ReloadableBox';
 import { tokenSelector } from '../../store/login';
-import { loadTotal, totalSelector, actions } from '../../store/total';
+import { accountsSelector, loadData, actions } from '../../store/accounts';
+import { settingsSelector } from '../../store/settings';
 import { round } from '../../helpers/math';
 
 import styles from './Total.module.scss';
 
 const selector = createSelector(
     tokenSelector,
-    totalSelector,
-    (token, { totals, rates, currency }) => ({ token, totals, rates, currency })
+    accountsSelector,
+    settingsSelector,
+    (token, { accounts, rates, currency }, { hiddenAccounts }) => ({
+        token,
+        accounts,
+        rates,
+        currency,
+        hiddenAccounts
+    })
 );
 
 export const Total = () => {
-    const [ isLoading, setIsLoading ] = useState(true);
-    const { token, totals, rates, currency: selectedCurrency } = useSelector(selector);
+    const {
+        token,
+        accounts,
+        rates,
+        currency: selectedCurrency,
+        hiddenAccounts
+    } = useSelector(selector);
     const dispatch = useDispatch();
+    const [ isLoading, setIsLoading ] = useState(!accounts);
     const [ , setError ] = useState('');
 
     const reload = useCallback(() => {
         setIsLoading(true);
 
-        dispatch(loadTotal(token, (result) => {
+        dispatch(loadData(token, (result) => {
             if (result.error) {
                 setError(result.error);
             }
@@ -34,12 +48,12 @@ export const Total = () => {
     }, [ dispatch, token ]);
 
     useEffect(() => {
-        if (totals) {
+        if (accounts) {
             return;
         }
 
         reload();
-    }, [ totals, reload ]);
+    }, [ accounts, reload ]);
 
     if (isLoading) {
         return (
@@ -52,10 +66,12 @@ export const Total = () => {
     }
 
     const multiplier = rates[selectedCurrency];
-    const existingTotals = totals.filter(
-        ({ currency }) => (currency in rates)
+    const totals = sumByCurrency(
+        accounts.filter(
+            ({ id, currency }) => (currency in rates) && !hiddenAccounts.includes(id)
+        )
     );
-    const total = existingTotals.map(
+    const total = totals.map(
         ({ currency, amount }) => amount / rates[currency]
     ).reduce(sum);
 
@@ -66,7 +82,7 @@ export const Total = () => {
                     { round(total * multiplier, 2) } { selectedCurrency }
                 </h2>
                 <div className={ styles.totals }>
-                    { existingTotals.map(({ amount, currency }) => (
+                    { totals.map(({ amount, currency }) => (
                         <div key={ currency } className={ styles.amount }>
                             { round(amount, 2) }
                             <button
@@ -85,4 +101,15 @@ export const Total = () => {
 
 function sum(acc, value) {
     return acc + value;
+}
+
+function sumByCurrency(accounts) {
+    const map = accounts.reduce((reduced, { currency, amount }) => ({
+        ...reduced,
+        [currency]: (reduced[currency] || 0) + amount
+    }), {});
+
+    return Object.entries(map).map(
+        ([ currency, amount ]) => ({ currency, amount })
+    );
 }

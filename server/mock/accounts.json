@@ -1,0 +1,32 @@
+[
+    {
+        "id": "3039383",
+        "name": "Наличные (USD)",
+        "currency": "USD",
+        "amount": 35
+    },
+    {
+        "id": "3038803",
+        "name": "Наличные (EUR)",
+        "currency": "EUR",
+        "amount": 66.4
+    },
+    {
+        "id": "3038804",
+        "name": "Кредитка (EUR)",
+        "currency": "EUR",
+        "amount": -100
+    },
+    {
+        "id": "3039174",
+        "name": "Наличные (RUB)",
+        "currency": "RUB",
+        "amount": 310
+    },
+    {
+        "id": "3038791",
+        "name": "Наличные (PLN)",
+        "currency": "PLN",
+        "amount": 179.57
+    }
+]
