@@ -11,15 +11,13 @@ export const loadBudgets = (token) => fetchJson('budgets', token);
 export const loadAccounts = (token) => fetchJson('accounts', token);
 
 export const loadRates = async (symbols) => {
-    const response = await fetch(`https://api.ratesapi.io/api/latest?base=PLN&symbols=${ formatSymbols(symbols) }`);
+    const response = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=PLN');
 
-    const { rates } = await response.json();
+    const { data } = await response.json();
 
-    return rates;
+    return Object.fromEntries(
+        Object.entries(data.rates).filter(
+            ([ symbol ]) => symbols.includes(symbol)
+        )
+    );
 };
-
-function formatSymbols(symbols) {
-    return symbols
-        .filter((symbol) => symbol !== 'BAM')
-        .join(',');
-}
