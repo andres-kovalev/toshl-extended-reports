@@ -2,6 +2,8 @@ const packageJson = require('../package.json');
 const { writeFile } = require('./common');
 
 const version = process.env.CIRCLE_TAG;
+const { scripts } = packageJson;
+const { build } = scripts;
 
 const allowedKeys = [
     'name',
@@ -23,6 +25,7 @@ const allowedKeys = [
     'bugs',
     'homepage',
     'dependencies',
+    'devDependencies',
     'engines'
 ];
 
@@ -32,7 +35,8 @@ Object.keys(packageJson).forEach(
 Object.assign(packageJson, {
     version,
     scripts: {
-        test: 'echo "tests passed..."'
+        test: 'echo "tests passed..."',
+        build
     }
 });
 
