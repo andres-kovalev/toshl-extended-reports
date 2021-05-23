@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/andres-kovalev/toshl-extended-report/compare/1.4.0...1.4.1) (2021-05-23)
+
+
+### Bug Fixes
+
+* migrate from rateapis.io to coinbase api to get rates ([2a06a75](https://github.com/andres-kovalev/toshl-extended-report/commit/2a06a75eb34651acb6a8b1124786aa5274d3cf32))
+
 ## [1.4.0](https://github.com/andres-kovalev/toshl-extended-report/compare/1.3.0...1.4.0) (2020-12-01)
 
 
